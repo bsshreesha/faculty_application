@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       /* Global Styles */
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the form */
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 1100px;
+        }
+
+        /* Section headers */
+        .form-container h2 {
+            color: #0073ff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        /* Note box */
+        .note {
+            background-color: #fdfdfd;
+            color: #d9534f;
+            padding: 10px;
+            border-left: 3px solid #d9534f;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Form group - label and input container */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Labels for the form fields */
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Uniform input field styling */
+        .form-control {
+            width: 100%;
+            padding: 12px; /* Ensuring consistent padding */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            height: 42px; /* Consistent height for all input fields */
+            box-sizing: border-box;
+        }
+
+        /* Dropdown styling */
+        .form-control-select {
+            -webkit-appearance: none; /* Removes the default arrow in some browsers */
+            -moz-appearance: none;
+            appearance: none;
+            padding-right: 30px; /* Space for custom arrow */
+            background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140"><polygon points="70,110 110,50 30,50"/></svg>') no-repeat right center;
+            background-size: 12px;
+        }
+
+        /* Input focus style */
+        .form-control:focus, .form-control-select:focus {
+            border-color: #0073ff;
+            box-shadow: none;
+            outline: none;
+        }
+
+        /* Button styling */
+        .btn-custom {
+            background-color: #0073ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            height: 42px; /* Same height as input fields */
+            box-sizing: border-box;
+        }
+
+        /* Button hover effect */
+        .btn-custom:hover {
+            background-color: #0056cc;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+        }
+        /* Adjusting the margin of form groups for more space */
+        .form-group {
+            margin-bottom: 20px;  /* Increase the space below each form group */
+            margin-right: 0px;   /* Add space to the right of each form group */
+        }
+
+        /* Adjusting the spacing between columns */
+        .form-row .col-md-4 {
+            padding-right: 15px;  /* Add space to the right of each column */
+        }
+
+        /* Adjusting the input and select fields */
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px; /* Adds padding inside the input fields */
+            box-sizing: border-box;
+        }
+
+        /* Customizing the prefix select box size */
+        .prefix-select {
+            width: 78.4px;  /* Adjust the width as needed */
+        }
+
+        /* Ensure that the input field takes up the remaining space */
+        .input-group .form-control:not(.prefix-select) {
+            flex: 1;
+        }
+		
+        .blink_me {
+            animation: blinker 1s linear infinite;
+            color:#135b28;
+            font-weight: 500;
+            }
+            
+            @keyframes blinker {  
+            60% { opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+    
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="form-container">
+                    <h2 class="text-center">Personal Information</h2>
+                    <div class="note">
+                        <p><strong>Note:</strong> The details below should be entered as they appear in the Matriculation Certificate (Class 10th Certificate) OR Equivalent certificate awarded to you. Fields marked with <span style="color: red;">*</span> are MANDATORY.</p>
+                    </div>
+                    <form autocomplete="off">
+                        <!-- Row 1 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="prefix">Faculty Full Name <span style="color: red;">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <select id="prefix" class="form-control prefix-select" required>
+                                            <option value="">Prefix</option>
+                                            <option value="Dr.">Dr.</option>
+                                            <option value="Mr.">Mr.</option>
+                                            <option value="Ms.">Ms.</option>
+                                            <option value="Mrs.">Mrs.</option>
+                                            <option value="Ms.">Miss.</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" class="form-control name-input" id="name" placeholder="Faculty Full Name" required onkeypress="return onlyAlpha_forName(this,event);" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off">
+                                </div>
+                            </div>                            
+                            <div class="form-group col-md-4">
+                                <label for="fatherName">Father / Spouse's name <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="fatherName" placeholder="Father/Spouse's Full name" required onkeypress="return onlyAlpha_forName(this,event);" onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="motherName">Mother's Name <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="motherName" placeholder="Mother's Full Name" required onkeypress="return onlyAlpha_forName(this,event);" onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                        </div>
+    
+                        <!-- Row 2 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="mobileNumber">Mobile Number <span style="color: red;">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="background-color: #ffffff;">+91</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="mobileNumber" placeholder="Mobile Number" required  onkeypress="return isNumber(this,event);"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="dob">Date of Birth <span style="color: red;">*</span></label>
+                                <input type="date" class="form-control" id="dob" placeholder="DD/MM/YYYY" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="gender">Gender <span style="color: red;">*</span></label>
+                                <select id="gender" class="form-control" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="M">MALE</option>
+                                    <option value="F">FEMALE</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <!-- Row 3 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="email">Email ID <span style="color: red;">*</span></label>
+                                <input type="email" class="form-control" id="email" placeholder="Email ID" required onkeypress="return onlyEmail(this,event);"  onkeyup="" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="aadhaarNumber">Aadhaar Number <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="aadhaarNumber" placeholder="Aadhaar Number" required onkeypress="return isNumber(this,event);"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="panNumber">Personal Account Number (PAN): <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="panNumber" placeholder="PAN Number" required  onkeypress="return onlyEmail(this,event);" onkeypress="return onlyAlpha_forName(this,event);" onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                        </div>
+    
+                        <!-- Row 4 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label for="address">Address <span style="color: red;">*</span></label>
+                                <textarea class="form-control" id="address" rows="3" placeholder="Enter Complete Address" required onkeyup="this.value = this.value.toUpperCase();" autocomplete="off"></textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="bloodGroup">Blood Group <span style="color: red;">*</span></label>
+                                <select id="bloodGroup" class="form-control" required>
+                                    <option selected>Select Blood Group</option>
+                                    <option value="">Select Blood Group</option>
+                                    <option value="A+">A Positive (A+)</option>
+                                    <option value="A-">A Negative (A-)</option>
+                                    <option value="B+">B Positive (B+)</option>
+                                    <option value="B-">B Negative (B-)</option>
+                                    <option value="AB+">AB Positive (AB+)</option>
+                                    <option value="AB-">AB Negative (AB-)</option>
+                                    <option value="O+">O Positive (O+)</option>
+                                    <option value="O-">O Negative (O-)</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="form-container">
+                    <h2 class="text-center">Educational Information</h2>
+                    <div class="note">
+                        <p><strong>Note:</strong> The details below should be entered as they appear in the Certificates awarded to you. Fields marked with <span style="color: red;">*</span> are MANDATORY.</p>
+                    </div>
+                    <form autocomplete="off">
+                        <!-- Row 1 -->
+                        <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="txt10M">10th / SSLC Marks/Percentage <span style="color: red;">*</span></label>
+                                   <input type="text" class="form-control" id="txt10M" placeholder="10th Marks / Percentage" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="txt12M">12th / PUC Marks/Percentage <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="txt12M" placeholder="12th Marks / Percentage" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="txtUG">UG Degree <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="txtUG" placeholder="Specify UG Degree Name" required onkeyup="this.value = this.value.toUpperCase();">
+                                </div>
+                        </div>
+                        <!-- Row 2 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="txtUGM">UG Marks/Percentage <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="txtUGM" placeholder="Undergraduate Marks / Percentage" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="txtPG">PG Degree <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="txtPG" placeholder="Specify PG Degree Name" required onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="txtPGM">PG Marks/Percentage <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="txtPGM" placeholder="Postgraduate Marks / Percentage" required>
+                            </div>
+                        </div>
+                        <!-- Row 3 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="txtOthD">Other Degree</label>
+                                <input type="text" class="form-control" id="txtOthD" placeholder="Specify Other Degree Name"  onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="txtOthDM">Other Degree Marks/Percentage</label>
+                                <input type="text" class="form-control" id="txtOthDM" placeholder="Other Degree Marks / Percentage" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="txtCert">Certifications <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="txtCert" placeholder="Specify the number of Certificates" required>
+                            </div>
+                        </div>
+                        <!-- Row 4 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="10thMC">Upload 10th Marks Card <span style="color: red;">*</span></label>
+                                <input type="file" class="form-control" id="10thMC" placeholder="10th Marks card" required>
+                                <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="12thMC">Upload 12th Marks Card <span style="color: red;">*</span></label>
+                                <input type="file" class="form-control" id="12thMC" placeholder="12th Marks card" required>
+                                <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="UGMC">Upload UG Marks Card <span style="color: red;">*</span></label>
+                                <input type="file" class="form-control" id="UGMC" placeholder="UG Marks card" required>
+                                <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div>
+                        </div>
+                        <!-- Row 5 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="PGMC">Upload PG Marks Card <span style="color: red;">*</span></label>
+                                <input type="file" class="form-control" id="PGMC" placeholder="PG Marks card" required>
+                                <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="OthDMC">Upload Other Degree Marks Card</label>
+                                <input type="file" class="form-control" id="OthDMC" placeholder="Other Degree Marks card">
+                                <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="Cert">Upload Certifications</label>
+                                <input type="file" class="form-control" id="Cert" placeholder="Certificates">
+                                <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div>
+                        </div>
+                       <!-- Row 6 -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="Photo">Photo <span style="color: red;">*</span></label>
+                               <input type="file" class="form-control" id="Photo" accept=".jpg" placeholder="Photo" required>
+                               <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="Sign">Signature <span style="color: red;">*</span></label>
+                                <input type="file" class="form-control" id="Sign" accept=".jpg" placeholder="Signature" required>
+                                <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div> 
+                            <div class="form-group col-md-4">
+                                <label for="ID">Government ID Proof <span style="color: red;">*</span></label>
+                                <input type="file" class="form-control" id="ID" accept=".jpg" placeholder="ID" required>
+                                <span class="blink_me" style="color:red">Upload Without Password protection.</span>
+                            </div> 
+                        </div>
+                    </div>
+            <!-- Submit Button -->
+            <div class="form-row">
+                <div class="col-md-4">
+                    <button type="reset" class="btn btn-danger btn-block" style="text-transform: uppercase;">Reset</button>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-success btn-block" style="text-transform: uppercase;">Submit</button>
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
