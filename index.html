@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 0;
+            background-color: #f8f9fa;
+            font-family: "Lato", sans-serif;
+            max-width: 90%; /* Adjust the percentage to reduce the size */
+        }
+
+        .form-container {
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+            border-radius: 8px;
+            background-color: white;
+            margin: 20px auto;
+            max-width: 1100px; /* Reduce the max-width */
+        }
+
+        .form-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-note {
+            font-size: 16px;
+            color: red;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+        position: relative;
+        margin-bottom: 25px;
+        text-align: left;
+        }
+
+        .input {
+        width: 100%;
+        height: 50px;
+        padding: 14px;
+        font-size: 16px;
+        border: 1px solid #DADCE0;
+        border-radius: 4px;
+        outline: none;
+        box-sizing: border-box;
+        padding-right: 40px; /* Make room for the eye icon */
+        }
+
+        .input:focus {
+        border-color: #000;
+        }
+
+        .label {
+        position: absolute;
+        top: 50%;
+        left: 14px;
+        transition: 0.3s;
+        transform: translateY(-50%);
+        background: white;
+        padding: 0 5px;
+        font-size: 16px;
+        color: #aaa;
+        }
+
+        .input:focus + .label,
+        .input:not(:placeholder-shown) + .label {
+        top: -10px;
+        left: 14px;
+        transform: translateY(0);
+        font-size: 14px;
+        color: #000;
+        }
+
+        .password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 14px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #aaa;
+        }
+
+        .password-toggle:hover {
+        color: #000;
+}
+
+        textarea.input {
+            height: 100px;
+            padding: 14px;
+        }
+
+        select.input {
+            height: 50px;
+            padding: 0 14px;
+        }
+
+        .btn-danger, .btn-success {
+            font-size: 16px;
+        }
+
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        .phone-group {
+        display: flex;
+        width: 100%;
+        position: relative;
+    }
+
+    .phone-prefix {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+        background-color: white;
+        border: 1px solid #DADCE0;
+        border-radius: 4px 0 0 4px;
+        background-color: #f8f9fa;
+        height: 50px;
+    }
+
+    .input-phone {
+        border-radius: 0 4px 4px 0;
+        flex-grow: 1;
+        text-transform: none;
+        height: 50px;
+        padding-left: 14px;
+        position: relative;
+        z-index: 1;
+        text-align: left;
+    }
+
+    /* Align the label to the beginning of the input box */
+    .phone-group .label {
+        position: absolute;
+        top: 50%;
+        left: 50px; /* Align to the left with a small padding */
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: #aaa;
+        pointer-events: none;
+        background-color: white;
+        padding: 0 5px;
+        z-index: 2;
+    }
+
+    .phone-group .input-phone:focus + .label,
+    .phone-group .input-phone:not(:placeholder-shown) + .label {
+        top: -10px;
+        left: 14px;
+        transform: translateY(0);
+        font-size: 14px;
+        color: #000;
+    }
+
+    .phone-group .input:focus + .label,
+    .phone-group .input:not(:placeholder-shown) + .label {
+        top: -10px;
+        left: 14px;
+        transform: translateY(0);
+        font-size: 14px;
+        color: #000;
+    }
+
+    
+    .name-group {
+        display: flex;
+        width: 100%;
+        position: relative;
+    }
+
+    .name-prefix {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+        background-color: white;
+        border: 1px solid #DADCE0;
+        border-radius: 4px 0 0 4px;
+        background-color: #f8f9fa;
+        height: 50px;
+    }
+
+    .input-name {
+        border-radius: 0 4px 4px 0;
+        flex-grow: 1;
+        text-transform: none;
+        height: 50px;
+        padding-left: 14px;
+        position: relative;
+        z-index: 1;
+        text-align: left;
+    }
+
+    /* Align the label to the beginning of the input box */
+    .name-group .label {
+        position: absolute;
+        top: 50%;
+        left: 100px; /* Align to the left with a small padding */
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: #aaa;
+        pointer-events: none;
+        background-color: white;
+        padding: 0 5px;
+        z-index: 2;
+    }
+
+    .name-group .input-name:focus + .label,
+    .name-group .input-name:not(:placeholder-shown) + .label {
+        top: -10px;
+        left: 14px;
+        transform: translateY(0);
+        font-size: 14px;
+        color: #000;
+    }
+
+    .name-group .input:focus + .label,
+    .name-group .input:not(:placeholder-shown) + .label {
+        top: -10px;
+        left: 14px;
+        transform: translateY(0);
+        font-size: 14px;
+        color: #000;
+    }
+        .input-email {
+            width: 100%;
+        }
+
+        .mandatory {
+            color: red;
+        }
+
+        .footer-container {
+            text-align: center;
+            color: white;
+            background-color: #3e3636;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .blink_me {
+            animation: blinker 1s linear infinite;
+            color:#135b28;
+            font-weight: 500;
+		}
+
+        @keyframes blinker {  
+			60% { opacity: 0; }
+		}
+				
+    </style>
+</head>
+<body>
+<div class="container form-container">
+    <h2 class="form-title" style="text-transform: uppercase;">Personal Information</h2>
+    <p class="form-note">
+        Note: The details below should be entered as they appear in the Matriculation Certificate.
+        Fields marked (<span class="mandatory">*</span>) are MANDATORY
+    </p>
+    <form autocomplete="off">
+        <div class="form-row">
+            <div class="col-md-4 input-container">
+                <div class="name-group">
+                    <select class="input name-prefix" required style= "background-color: white ; width: 36%;">
+                        <option value="" disabled selected hidden>Prefix</option>
+                        <option value="Dr.">Dr.</option>
+                        <option value="Mr">Mr.</option>
+                        <option value="Ms.">Ms.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Prof.">Prof.</option>
+                    </select>
+                    <input type="text" class="input" placeholder=" " maxlength="12" required>
+                    <label class="label">Faculty Full Name <span class="mandatory">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-4 input-container">
+                <input type="text" class="input" placeholder=" " required>
+                <label class="label">Father/Spouse's Name <span class="mandatory">*</span></label>
+            </div>
+            <div class="col-md-4 input-container">
+                <input type="email" class="input input-email" placeholder=" " required>
+                <label class="label">Mother's Name <span class="mandatory">*</span></label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 input-container">
+                <div class="phone-group">
+                    <div class="phone-prefix" style="background-color: white;">+91</div>
+                    <input type="text" class="input" placeholder=" " maxlength="10" required>
+                    <label class="label">Mobile Number <span class="mandatory">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-4 input-container">
+                <input type="date" class="input" placeholder=" " required>
+                <label class="label">Date of Birth <span class="mandatory">*</span></label>
+            </div>
+            <div class="col-md-4 input-container">
+                <select class="input" required>
+                    <option value="" disabled selected hidden>Select</option>
+                    <option value="M">MALE</option>
+                    <option value="F">FEMALE</option>
+                </select>
+                <label class="label">Gender <span class="mandatory">*</span></label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 input-container">
+                <input type="text" class="input" placeholder=" " required>
+                <label class="label">Email ID <span class="mandatory">*</span></label>
+            </div>
+            <div class="col-md-4 input-container">
+                <input type="text" class="input" placeholder=" " maxlength="12" required>
+                <label class="label">Aadhaar Number <span class="mandatory">*</span></label>
+            </div>
+            <div class="col-md-4 input-container">
+                <input type="text" class="input" placeholder=" " maxlength="10" required>
+                <label class="label">PAN (Personal Account Number) <span class="mandatory">*</span></label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-8 input-container">
+                <!-- <input type="text" class="input" placeholder=" " required> -->
+                <textarea class="input" placeholder=" " required></textarea>
+                <label class="label">Address <span class="mandatory">*</span></label>
+            </div>
+            <div class="col-md-4 input-container">
+                <select class="input">
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A Positive (A+)</option>
+                    <option value="A-">A Negative (A-)</option>
+                    <option value="B+">B Positive (B+)</option>
+                    <option value="B-">B Negative (B-)</option>
+                    <option value="AB+">AB Positive (AB+)</option>
+                    <option value="AB-">AB Negative (AB-)</option>
+                    <option value="O+">O Positive (O+)</option>
+                    <option value="O-">O Negative (O-)</option>
+                </select>
+                <label class="label">Blood Group <span class="mandatory">*</span></label>
+            </div>
+        </div>
+</div>
+<div class="container form-container" autocomplete="off">
+    <h2 class="form-title" style="text-transform: uppercase;">Educational Information</h2>
+    <p class="form-note">
+        <redtext class="notetitle">Note:</redtext>
+        The details below should be entered as they appear in all the certificates awarded to you.<br>
+        Fields marked (<span class="mandatory">*</span>) are MANDATORY<br>
+        File Size should be greater than 2MB..!
+    </p>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">10th / SSLC Marks / Percentage <span class="mandatory">*</span></label>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">12th / II PUC Marks / Percentage <span class="mandatory">*</span></label>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">Specify UG Degree <span class="mandatory">*</span></label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">UG Degree CGPA / Percentage / Marks <span class="mandatory">*</span></label>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">Specify PG Degree <span class="mandatory">*</span></label>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">PG Degree CGPA / Percentage / Marks <span class="mandatory">*</span></label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " >
+            <label class="label">Specify Other Degree (If Any)</label>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " >
+            <label class="label">Other Degree CGPA / Percentage / Marks </label>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">Certifications (In Number) <span class="mandatory">*</span></label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" " required>
+            <label class="label">Upload 10th Marks Card <span class="mandatory">*</span></label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" " required>
+            <label class="label">Upload 12th/II PUC Marks Card <span class="mandatory">*</span></label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" " required>
+            <label class="label">Upload UG Marks and Degree Certificate <span class="mandatory">*</span></label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" " required>
+            <label class="label">Upload PG Marks and Degree Certificate <span class="mandatory">*</span></label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" ">
+            <label class="label">Upload Other Degree Certificate </label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" " required>
+            <label class="label">Upload All Certifications <span class="mandatory">*</span></label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" " required>
+            <label class="label">Upload Photo <span class="mandatory">*</span></label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" ">
+            <label class="label">Upload Signature <span class="mandatory">*</span></label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+        <div class="col-md-4 input-container">
+            <input type="file" class="input" placeholder=" " required>
+            <label class="label">Upload Any Government ID Proof <span class="mandatory">*</span></label>
+            <span class="blink_me" style="color:red">Upload Correct Document Without Password Protected to verify, Otherwise it will be rejected..!</span>
+        </div>
+    </div>
+</div>
+<div class="container form-container" autocomplete="off">
+    <h2 class="form-title" style="text-transform: uppercase;">Professional Information</h2>
+    <p class="form-note">
+        <redtext class="notetitle">Note:</redtext>
+        Enter Correct Bank Account Details
+    </p>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">Faculty Experience (IN YEARS):  <span class="mandatory">*</span></label>
+            </div>
+            <div class="col-md-4 input-container">
+                <div class="name-group">
+                    <select class="input name-prefix" name="pr_college" id="yon" required style= "background-color: white ; width: 40%;">
+                        <option value="" disabled selected hidden>Select</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                    <select class="input" name="pr_college_code" id="txtPWC" required style="background-color: white;">
+                        <option value="">Code</option>
+                        <option value="AA">AA</option>
+                        <option value="AB">AB</option>
+                        <option value="AC">AC</option>
+                        <option value="AD">AD</option>
+                        <option value="AE">AE</option>
+                        <option value="AF">AF</option>
+                        <option value="AG">AG</option>
+                        <option value="AH">AH</option>
+                        <option value="AI">AI</option>
+                        <option value="AJ">AJ</option>
+                        <option value="AK">AK</option>
+                        <option value="AL">AL</option>
+                        <option value="AM">AM</option>
+                        <option value="AN">AN</option>
+                        <option value="AO">AO</option>
+                        <option value="AP">AP</option>
+                        <option value="AQ">AQ</option>
+                        <option value="AR">AR</option>
+                        <option value="AS">AS</option>
+                        <option value="AT">AT</option>
+                        <option value="AU">AU</option>
+                        <option value="AV">AV</option>
+                        <option value="AW">AW</option>
+                        <option value="AX">AX</option>
+                        <option value="AY">AY</option>
+                        <option value="AZ">AZ</option>
+                        <option value="BA">BA</option>
+                        <option value="BB">BB</option>
+                        <option value="BC">BC</option>
+                        <option value="BD">BD</option>
+                        <option value="BE">BE</option>
+                        <option value="BF">BF</option>
+                        <option value="BG">BG</option>
+                        <option value="BH">BH</option>
+                        <option value="BI">BI</option>
+                        <option value="BJ">BJ</option>
+                        <option value="BK">BK</option>
+                        <option value="BL">BL</option>
+                        <option value="BM">BM</option>
+                        <option value="BN">BN</option>
+                        <option value="BO">BO</option>
+                        <option value="BP">BP</option>
+                        <option value="BQ">BQ</option>
+                        <option value="BR">BR</option>
+                        <option value="BS">BS</option>
+                        <option value="BT">BT</option>
+                        <option value="BU">BU</option>
+                        <option value="BV">BV</option>
+                        <option value="BW">BW</option>
+                        <option value="BX">BX</option>
+                        <option value="BY">BY</option>
+                        <option value="BZ">BZ</option>
+                        <option value="CA">CA</option>
+                        <option value="CB">CB</option>
+                        <option value="CC">CC</option>
+                        <option value="CD">CD</option>
+                        <option value="CE">CE</option>
+                        <option value="CF">CF</option>
+                        <option value="CG">CG</option>
+                        <option value="CI">CI</option>
+                        <option value="CK">CK</option>
+                        <option value="CM">CM</option>
+                        <option value="CR">CR</option>
+                        <option value="CS">CS</option>
+                        <option value="CX">CX</option>
+                        <option value="CY">CY</option>
+                        <option value="CZ">CZ</option>
+                        <option value="DA">DA</option>
+                        <option value="DB">DB</option>
+                        <option value="DC">DC</option>
+                        <option value="DM">DM</option>
+                        <option value="DS">DS</option>
+                        <option value="DT">DT</option>
+                        <option value="DY">DY</option>
+                        <option value="EA">EA</option>
+                        <option value="EB">EB</option>
+                        <option value="EC">EC</option>
+                        <option value="ED">ED</option>
+                        <option value="EE">EE</option>
+                        <option value="EK">EK</option>
+                        <option value="EP">EP</option>
+                        <option value="ES">ES</option>
+                        <option value="EW">EW</option>
+                        <option value="EX">EX</option>
+                        <option value="FA">FA</option>
+                        <option value="FZ">FZ</option>
+                        <option value="GA">GA</option>
+                        <option value="GB">GB</option>
+                        <option value="GC">GC</option>
+                        <option value="GD">GD</option>
+                        <option value="GE">GE</option>
+                        <option value="GF">GF</option>
+                        <option value="GG">GG</option>
+                        <option value="GH">GH</option>
+                        <option value="GI">GI</option>
+                        <option value="GJ">GJ</option>
+                        <option value="GK">GK</option>
+                        <option value="GL">GL</option>
+                        <option value="GM">GM</option>
+                        <option value="GN">GN</option>
+                        <option value="GO">GO</option>
+                        <option value="GP">GP</option>
+                        <option value="GQ">GQ</option>
+                        <option value="GR">GR</option>
+                        <option value="GS">GS</option>
+                        <option value="GT">GT</option>
+                        <option value="GU">GU</option>
+                        <option value="GV">GV</option>
+                        <option value="GW">GW</option>
+                        <option value="GX">GX</option>
+                        <option value="GY">GY</option>
+                        <option value="GZ">GZ</option>
+                        <option value="HA">HA</option>
+                        <option value="HG">HG</option>
+                        <option value="HK">HK</option>
+                        <option value="HM">HM</option>
+                        <option value="HN">HN</option>
+                        <option value="HS">HS</option>
+                        <option value="IA">IA</option>
+                        <option value="IB">IB</option>
+                        <option value="IC">IC</option>
+                        <option value="ID">ID</option>
+                        <option value="IE">IE</option>
+                        <option value="IG">IG</option>
+                        <option value="IH">IH</option>
+                        <option value="II">II</option>
+                        <option value="IM">IM</option>
+                        <option value="IR">IR</option>
+                        <option value="IS">IS</option>
+                        <option value="IT">IT</option>
+                        <option value="IV">IV</option>
+                        <option value="JA">JA</option>
+                        <option value="JB">JB</option>
+                        <option value="JC">JC</option>
+                        <option value="JD">JD</option>
+                        <option value="JE">JE</option>
+                        <option value="JG">JG</option>
+                        <option value="JH">JH</option>
+                        <option value="JI">JI</option>
+                        <option value="JJ">JJ</option>
+                        <option value="JK">JK</option>
+                        <option value="JM">JM</option>
+                        <option value="JN">JN</option>
+                        <option value="JR">JR</option>
+                        <option value="JS">JS</option>
+                        <option value="JT">JT</option>
+                        <option value="JV">JV</option>
+                        <option value="JX">JX</option>
+                        <option value="JY">JY</option>
+                        <option value="JZ">JZ</option>
+                        <option value="KA">KA</option>
+                        <option value="KB">KB</option>
+                        <option value="KC">KC</option>
+                        <option value="KD">KD</option>
+                        <option value="KE">KE</option>
+                        <option value="KF">KF</option>
+                        <option value="KG">KG</option>
+                        <option value="KH">KH</option>
+                        <option value="KI">KI</option>
+                        <option value="KL">KL</option>
+                        <option value="KM">KM</option>
+                        <option value="KN">KN</option>
+                        <option value="KS">KS</option>
+                        <option value="KT">KT</option>
+                        <option value="KV">KV</option>
+                        <option value="LA">LA</option>
+                        <option value="LB">LB</option>
+                        <option value="LG">LG</option>
+                        <option value="LV">LV</option>
+                        <option value="MA">MA</option>
+                        <option value="MB">MB</option>
+                        <option value="MC">MC</option>
+                        <option value="MD">MD</option>
+                        <option value="ME">ME</option>
+                        <option value="MG">MG</option>
+                        <option value="MH">MH</option>
+                        <option value="MJ">MJ</option>
+                        <option value="MK">MK</option>
+                        <option value="MM">MM</option>
+                        <option value="MN">MN</option>
+                        <option value="MO">MO</option>
+                        <option value="MQ">MQ</option>
+                        <option value="MR">MR</option>
+                        <option value="MS">MS</option>
+                        <option value="MT">MT</option>
+                        <option value="MU">MU</option>
+                        <option value="MV">MV</option>
+                        <option value="MW">MW</option>
+                        <option value="MX">MX</option>
+                        <option value="MY">MY</option>
+                        <option value="MZ">MZ</option>
+                        <option value="NA">NA</option>
+                        <option value="NC">NC</option>
+                        <option value="NE">NE</option>
+                        <option value="NG">NG</option>
+                        <option value="NH">NH</option>
+                        <option value="NI">NI</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NN">NN</option>
+                        <option value="NS">NS</option>
+                        <option value="NT">NT</option>
+                        <option value="NX">NX</option>
+                        <option value="NY">NY</option>
+                        <option value="NZ">NZ</option>
+                        <option value="OQ">OQ</option>
+                        <option value="OX">OX</option>
+                        <option value="OY">OY</option>
+                        <option value="OZ">OZ</option>
+                        <option value="PA">PA</option>
+                        <option value="PB">PB</option>
+                        <option value="PC">PC</option>
+                        <option value="PD">PD</option>
+                        <option value="PE">PE</option>
+                        <option value="PG">PG</option>
+                        <option value="PH">PH</option>
+                        <option value="PI">PI</option>
+                        <option value="PL">PL</option>
+                        <option value="PM">PM</option>
+                        <option value="PN">PN</option>
+                        <option value="PR">PR</option>
+                        <option value="PS">PS</option>
+                        <option value="PT">PT</option>
+                        <option value="PZ">PZ</option>
+                        <option value="QB">QB</option>
+                        <option value="RA">RA</option>
+                        <option value="RB">RB</option>
+                        <option value="RC">RC</option>
+                        <option value="RD">RD</option>
+                        <option value="RE">RE</option>
+                        <option value="RF">RF</option>
+                        <option value="RG">RG</option>
+                        <option value="RH">RH</option>
+                        <option value="RI">RI</option>
+                        <option value="RL">RL</option>
+                        <option value="RN">RN</option>
+                        <option value="RQ">RQ</option>
+                        <option value="RR">RR</option>
+                        <option value="RS">RS</option>
+                        <option value="RV">RV</option>
+                        <option value="RW">RW</option>
+                        <option value="RX">RX</option>
+                        <option value="RY">RY</option>
+                        <option value="RZ">RZ</option>
+                        <option value="SA">SA</option>
+                        <option value="SB">SB</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="SE">SE</option>
+                        <option value="SF">SF</option>
+                        <option value="SG">SG</option>
+                        <option value="SH">SH</option>
+                        <option value="SI">SI</option>
+                        <option value="SJ">SJ</option>
+                        <option value="SK">SK</option>
+                        <option value="SL">SL</option>
+                        <option value="SM">SM</option>
+                        <option value="SN">SN</option>
+                        <option value="SO">SO</option>
+                        <option value="SP">SP</option>
+                        <option value="SR">SR</option>
+                        <option value="SS">SS</option>
+                        <option value="ST">ST</option>
+                        <option value="SU">SU</option>
+                        <option value="SV">SV</option>
+                        <option value="SW">SW</option>
+                        <option value="SX">SX</option>
+                        <option value="SY">SY</option>
+                        <option value="SZ">SZ</option>
+                        <option value="TA">TA</option>
+                        <option value="TB">TB</option>
+                        <option value="TC">TC</option>
+                        <option value="TG">TG</option>
+                        <option value="TH">TH</option>
+                        <option value="TJ">TJ</option>
+                        <option value="TP">TP</option>
+                        <option value="TR">TR</option>
+                        <option value="TS">TS</option>
+                        <option value="TV">TV</option>
+                        <option value="UB">UB</option>
+                        <option value="UD">UD</option>
+                        <option value="VA">VA</option>
+                        <option value="VB">VB</option>
+                        <option value="VC">VC</option>
+                        <option value="VD">VD</option>
+                        <option value="VE">VE</option>
+                        <option value="VF">VF</option>
+                        <option value="VG">VG</option>
+                        <option value="VH">VH</option>
+                        <option value="VI">VI</option>
+                        <option value="VJ">VJ</option>
+                        <option value="VK">VK</option>
+                        <option value="VL">VL</option>
+                        <option value="VM">VM</option>
+                        <option value="VN">VN</option>
+                        <option value="VP">VP</option>
+                        <option value="VS">VS</option>
+                        <option value="VT">VT</option>
+                        <option value="VV">VV</option>
+                        <option value="VW">VW</option>
+                        <option value="VX">VX</option>
+                        <option value="VY">VY</option>
+                        <option value="VZ">VZ</option>
+                        <option value="WA">WA</option>
+                        <option value="WB">WB</option>
+                        <option value="WC">WC</option>
+                        <option value="WD">WD</option>
+                        <option value="WE">WE</option>
+                        <option value="WF">WF</option>
+                        <option value="WG">WG</option>
+                        <option value="WH">WH</option>
+                        <option value="WI">WI</option>
+                        <option value="WJ">WJ</option>
+                        <option value="WK">WK</option>
+                        <option value="WM">WM</option>
+                        <option value="WS">WS</option>
+                        <option value="XA">XA</option>
+                        <option value="XB">XB</option>
+                        <option value="XC">XC</option>
+                        <option value="XD">XD</option>
+                        <option value="XE">XE</option>
+                        <option value="XF">XF</option>
+                        <option value="XG">XG</option>
+                        <option value="YA">YA</option>
+                        <option value="YD">YD</option>
+                        <option value="YG">YG</option>
+                        <option value="ZA">ZA</option>
+                        <option value="ZB">ZB</option>
+                        <option value="ZC">ZC</option>
+                        <option value="ZD">ZD</option>
+                        <option value="ZE">ZE</option>
+                        <option value="ZF">ZF</option>
+                        <option value="ZH">ZH</option>
+                        <option value="ZI">ZI</option>
+                        <option value="ZW">ZW</option>
+                        <option value="ZX">ZX</option>
+                        <option value="N/A">Not Applicable</option>
+                    </select>
+                    <label class="label">Previous College Worked <span class="mandatory">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-4 input-container">
+                <select class="input">
+                    <option value="">Select Designation</option>
+                    <option value="Principal">Principal</option>
+                    <option value="HoD">Head of the Department</option>
+                    <option value="Professor">Professor</option>
+                    <option value="Associate Professor">Associate Professor</option>
+                    <option value="Assistant Professor">Assistant Professor</option>
+                    <option value="Lecturer">Lecturer</option>
+                    <option value="Lab Assistant">Lab Assistant</option>
+                    <option value="PED">Physical Education Director</option>
+                </select>
+                <label class="label">Designation  <span class="mandatory">*</span></label>
+                </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 input-container">
+                <input type="text" class="input" placeholder=" " required>
+                <label class="label">Bank Account Number <span class="mandatory">*</span></label>
+            </div>
+            <div class="col-md-4 input-container">
+                <input type="text" class="input" placeholder=" " required>
+                <label class="label">Bank IFSC Code <span class="mandatory">*</span></label>
+            </div>
+            <div class="col-md-4 input-container">
+                <input type="text" class="input" placeholder=" " required>
+                <label class="label">Bank Name <span class="mandatory">*</span></label>
+            </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">Branch Name <span class="mandatory">*</span></label>
+        </div>
+        <div class="col-md-8 input-container">
+            <input type="text" class="input" placeholder=" " required>
+            <label class="label">Work Address <span class="mandatory">*</span></label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 input-container">
+            <select class="input">
+                <option value="">Select Department</option>
+                <option value="AIML">Artificial Intelligence and Machine Learning (AIML)</option>
+                <option value="CV">Civil Engineering (CV)</option>
+                <option value="CHE">Chemistry (CHE)</option>
+                <option value="CSE">Computer Science and Engineering (CSE)</option>
+                <option value="ECE">Electronics and Communication Engineering (ECE)</option>
+                <option value="ISE">Information Science and Engineering (ISE)</option>
+                <option value="PHY">Physics (PHY)</option>
+                <option value="MAT">Mathematics (MAT)</option>
+                <option value="ME">Mechanical Engineering (ME)</option>
+            </select>
+            <label class="label">Department <span class="mandatory">*</span></label>
+        </div>
+    <div class="col-md-4 input-container">
+        <select class="input">
+            <option value="" selected="selected">Select</option>
+            <option value="B.E/B.Tech">B.E / B.Tech</option>
+            <option value="B.Arch">B.Arch</option>
+            <option value="BSc">BSc</option>
+            <option value="MBA">MBA</option>
+            <option value="MCA">MCA</option>
+            <option value="M.Tech">M.Tech</option>
+            <option value="M.Arch">M.Arch</option>
+            <option value="MSc">MSc</option>
+            <option value="MSc.Engg">MSc. Engg</option>
+            <option value="Ph.D">Ph.D</option>
+            <option value="Other">Other</option>
+        </select>
+        <label class="label">Highest Qualification <span class="mandatory">*</span></label>
+    </div>
+    <div class="col-md-4 input-container">
+        <select class="input">
+            <option value="" selected="selected">Select</option>
+            <option value="Permanent">PERMANENT</option>
+            <option value="Temporary">TEMPORARY</option>
+            <option value="Contract">CONTRACT</option>
+            <option value="Guest">GUEST</option>
+            <option value="Others">OTHERS</option>
+        </select>
+        <label class="label">Nature of Appointment <span class="mandatory">*</span></label>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-4 input-container">
+        <input type="password" class="input" placeholder=" " id="password" required>
+        <label class="label">Password <span class="mandatory">*</span></label>
+        <i class="far fa-eye password-toggle" id="togglePassword"></i>
+    </div>
+    <div class="col-md-4 input-container">
+        <input type="password" class="input" placeholder=" " id="confirmPassword" required>
+        <label class="label">Confirm Password <span class="mandatory">*</span></label>
+        <i class="far fa-eye password-toggle" id="toggleConfirmPassword"></i>
+    </div>
+    <div class="col-md-4 input-container">
+        <input type="date" class="input" placeholder=" " required>
+        <label class="label">Date of Joining <span class="mandatory">*</span></label>
+    </div>
+</div>
+<div class="row" style="margin-bottom:15px">
+    <div class="col-md-3">
+        <a href="/VTU/index.html"><button name="cancel" type="button" class="form-control btn-danger">CANCEL</button></a>
+    </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-3">
+        <input name="submit" type="submit" class="form-control btn-success" value="SUBMIT" />
+    </div>
+    </div>
+</div>
+<div class="container form-container footer-container">
+    <div>© 2024 Designed & Developed by <b>B S Shreesha</b>, JIT, Bangalore. Karnataka. India.</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordToggle = document.querySelector('#togglePassword');
+        const confirmPasswordToggle = document.querySelector('#toggleConfirmPassword');
+        const password = document.querySelector('#password');
+        const confirmPassword = document.querySelector('#confirmPassword');
+
+        passwordToggle.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        confirmPasswordToggle.addEventListener('click', function() {
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+    });
+</script>
+</form>
+</body>
+</html>
